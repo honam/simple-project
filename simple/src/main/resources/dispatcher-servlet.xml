@@ -20,4 +20,5 @@
         <property name="order" value="0" />
         <property name="caseSensitive" value="true"/>
     </bean>
+
 </beans>

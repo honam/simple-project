@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 @Controller
-@RequestMapping("/simpleService")
 public class SimpleService {
 
-    @RequestMapping("hello")
+    @RequestMapping
     @ResponseBody
     public String hello(String name){
         return name + ",hello";
