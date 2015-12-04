@@ -10,15 +10,25 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-    <context:component-scan base-package="com.honam.service"/>
+    <context:component-scan base-package="com.honam"/>
+    <mvc:annotation-driven />
     <!-- declares support for general annotations such as @Required, @Autowired, @PostConstruct, and so on. -->
-    <context:annotation-config/>
+    <!--<context:annotation-config/>-->
 
-
-    <!-- 根据Controller的名字来找 controller 。ex：UserController.class mapping user -->
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-        <property name="order" value="0" />
-        <property name="caseSensitive" value="true"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
     </bean>
+
 
 </beans>
