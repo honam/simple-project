@@ -79,7 +79,8 @@ public class ApiScanEngine {
                         && null != paramAnnotations[i][j]) {
                     if (paramAnnotations[i][j] .annotationType().equals( APIParam.class)) {
                         APIParam openAPIParam = (APIParam) paramAnnotations[i][j];
-                        apiParamVO.setDescription(openAPIParam .value());
+                        apiParamVO.setDescription(openAPIParam.description());
+                        apiParamVO.setRequired(openAPIParam.isRequired());
                     }
                     if (paramAnnotations[i][j] .annotationType().equals( RequestBody.class)) {
                         apiParamVO.setIsJson(true);
@@ -135,19 +136,21 @@ public class ApiScanEngine {
         final Map<String, List<ApiMethod>> categoryApiMap = new HashMap<String, List<ApiMethod>>();
         Map<String, Object> map = applicationContext.getBeansWithAnnotation(Controller.class);
         for (final String beanName : map.keySet()) {
-            Object controller = map.get(beanName);
+            final Object controller = map.get(beanName);
+            final RequestMapping classRM = controller.getClass().getAnnotation(RequestMapping.class);
             ReflectionUtils.doWithMethods(controller.getClass(), new ReflectionUtils.MethodCallback() {
                 @Override
                 public void doWith(Method method) throws IllegalArgumentException, IllegalAccessException {
                     APIMethod api = method .getAnnotation(APIMethod.class);
-                    String url = beanName.toLowerCase() + "/" + method.getName() + ".gm";
+                    RequestMapping methodRM = method.getAnnotation(RequestMapping.class);
+                    String url = classRM.value()[0] + "/" + methodRM.value()[0] + ".do";//only support first url mapping
                     String category = api.category().toString();
                     if (null == categoryApiMap.get(category)) {
                         categoryApiMap.put(category, new ArrayList<ApiMethod>());
                     }
 
                     ApiMethod apiVO = new ApiMethod();
-                    apiVO.setName(method.getClass().getName() + "." + method.getName());//方法名
+                    apiVO.setName(controller.getClass().getSimpleName() + "." + method.getName());//method name
                     apiVO.setCategory(category);
                     apiVO.setUrl(new String[]{url});
                     apiVO.setDescription(api.desc());
@@ -213,7 +216,7 @@ public class ApiScanEngine {
                                             .equals(APIParam.class)) {
                                         APIParam openAPIParam = (APIParam) paramAnnotations[i][j];
                                         apiParamVO.setDescription(openAPIParam
-                                                .value());
+                                                .description());
                                     }
                                     if (paramAnnotations[i][j].annotationType()
                                             .equals(RequestBody.class)) {

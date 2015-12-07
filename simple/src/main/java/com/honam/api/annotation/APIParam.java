@@ -11,5 +11,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface APIParam {
-    String value() default "";
+    String description() default "";
+    boolean isRequired() default false;
 }

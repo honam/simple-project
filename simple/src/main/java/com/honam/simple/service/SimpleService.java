@@ -1,6 +1,7 @@
 package com.honam.simple.service;
 
 import com.honam.api.annotation.APIMethod;
+import com.honam.api.annotation.APIParam;
 import com.honam.api.vo.ApiAuthor;
 import com.honam.api.vo.ApiCategory;
 import com.honam.simple.vo.User;
@@ -16,16 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("simple")
 public class SimpleService {
 
-    @RequestMapping("hello")
-    @ResponseBody
-    public String hello(String name){
-        return name + ",hello";
-    }
-
     @APIMethod(desc = "获取用户信息", category = ApiCategory.USER, apiAuthors = ApiAuthor.Honam_xu, version = "1.0")
     @RequestMapping("getuser")
     @ResponseBody
-    public User getUser(String name){
+    public User getUser(@APIParam(isRequired = true, description = "用户名") String name){
         User u = new User();
         u.setId(0L);
         u.setUserName(name);

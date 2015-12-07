@@ -13,7 +13,6 @@ public class ApiMethod implements Serializable{
     private String category;
     private boolean supportHttp;
     private String description;
-    private List<String> apiUsers;
     private List<String> apiAuthors;
     private String[] url;
     List<ApiParam> param = new ArrayList<ApiParam>();
@@ -49,14 +48,6 @@ public class ApiMethod implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<String> getApiUsers() {
-        return apiUsers;
-    }
-
-    public void setApiUsers(List<String> apiUsers) {
-        this.apiUsers = apiUsers;
     }
 
     public List<String> getApiAuthors() {

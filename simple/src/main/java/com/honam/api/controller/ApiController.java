@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by xuhaonan on 15/11/27.
  */
 @Controller
-@RequestMapping
+@RequestMapping("api")
 public class ApiController {
     @Autowired
     private ApiScanEngine apiScanEngine;
@@ -31,7 +31,7 @@ public class ApiController {
         return categoryApiMap;
     }
 
-    @RequestMapping
+    @RequestMapping("getValueObjectDesc")
     @ResponseBody
     public ApiValueObject getValueObjectDesc(String className) throws ClassNotFoundException{
         return apiScanEngine.getValueObjectDesc(className);
