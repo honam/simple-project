@@ -100,13 +100,13 @@
     <build>
         <finalName>simple</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-        <outputDirectory>${basedir}/target/simple/WEB-INF/classes</outputDirectory>
+        <outputDirectory>${basedir}/target/classes</outputDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <targetPath>${basedir}/target/simple/WEB-INF/classes</targetPath>
+                <targetPath>${basedir}/target/classes</targetPath>
                 <includes>
-                    <include>*.*</include>
+                    <include>*</include>
                 </includes>
                 <excludes>
                     <exclude>config.properties</exclude>
@@ -114,9 +114,9 @@
             </resource>
             <resource>
                 <directory>src/main/resources/${env}</directory>
-                <targetPath>${basedir}/target/simple/WEB-INF/classes</targetPath>
+                <targetPath>${basedir}/target/classes</targetPath>
                 <includes>
-                    <include>*.*</include>
+                    <include>*</include>
                 </includes>
             </resource>
         </resources>
@@ -131,6 +131,47 @@
                 </configuration>
             </plugin>
             <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <classifier>client</classifier>
+                            <includes>
+                                <include>com/honam/api/*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>false</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <excludeResources>true</excludeResources>
+                            <finalName>simple</finalName>
+                            <includes>
+                                <include>com/honam/api/*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.1</version>
@@ -138,7 +179,7 @@
                     <port>8080</port>
                     <path>/simple</path>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <finalName>tmsServer</finalName>
+                    <finalName>simpleServer</finalName>
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
