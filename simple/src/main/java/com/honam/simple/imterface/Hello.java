@@ -1,5 +1,6 @@
 package com.honam.simple.imterface;
 
+import com.github.pagehelper.Page;
 import com.honam.simple.vo.User;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface Hello {
     public String sayHello();
 
     public List<User> getUser();
+
+    public Page<User> getUserByPage();
 }

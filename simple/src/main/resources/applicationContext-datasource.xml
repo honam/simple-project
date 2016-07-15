@@ -52,4 +52,39 @@
         <aop:advisor advice-ref="testTx" pointcut="execution(* com.honam.simple..*Impl.*(..))"/>
     </aop:config>
 
+    <!-- mybatis -->
+    <!-- 映射xml位置 -->
+    <bean id="xSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="myDataSource" />
+        <property name="mapperLocations">
+            <list>
+                <value>
+                    classpath:/mapper/*.xml
+                </value>
+                <!-- <value>
+                    classpath*:/mapper/*.xml
+                </value> -->
+            </list>
+        </property>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=false
+                            rowBoundsWithCount=true
+                            offsetAsPageNum=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!-- 数据库持久层位置 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.honam.simple.dao" />
+        <property name="sqlSessionFactoryBeanName" value="xSqlSessionFactory" />
+    </bean>
+
 </beans>

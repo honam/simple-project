@@ -156,6 +156,7 @@
                 <targetPath>${basedir}/target/classes</targetPath>
                 <includes>
                     <include>*</include>
+                    <include>mapper/*</include>
                 </includes>
                 <excludes>
                     <exclude>config.properties</exclude>

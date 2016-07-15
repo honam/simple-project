@@ -1,5 +1,6 @@
 package com.honam.simple;
 
+import com.github.pagehelper.Page;
 import com.honam.BaseTest;
 import com.honam.simple.imterface.Hello;
 import com.honam.simple.vo.User;
@@ -25,5 +26,11 @@ public class HelloTest extends BaseTest{
     public void getUser(){
         List<User> user = hello.getUser();
         System.out.println(user.size());
+    }
+
+    @Test
+    public void getUserByMapper(){
+        Page<User> userByPage = hello.getUserByPage();
+        System.out.println(userByPage);
     }
 }
