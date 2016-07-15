@@ -1,7 +1,8 @@
-package com.honam.api.annotation;
+package com.honam.base.api.annotation;
 
-import com.honam.api.vo.ApiAuthor;
-import com.honam.api.vo.ApiCategory;
+
+import com.honam.base.api.vo.ApiAuthor;
+import com.honam.base.api.vo.ApiCategory;
 
 import java.lang.annotation.*;
 

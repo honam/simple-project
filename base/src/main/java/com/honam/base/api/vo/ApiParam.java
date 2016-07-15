@@ -1,17 +1,27 @@
-package com.honam.api.vo;
+package com.honam.base.api.vo;
 
 import java.io.Serializable;
 
 /**
  * Created by xuhaonan on 15/11/27.
  */
-public class ApiField implements Serializable{
-    private String name;
-    private String className ;
-    private String description ;
+public class ApiParam implements Serializable{
+    private String name="" ;
+    private String className="" ;
+    private String description="" ;
+    private Boolean isJson=false ;
     private Boolean isValueObject=false ;
     private Boolean isCollection=false ;
     private String CollectionClass="" ;
+    private Boolean required=false;
+
+    public Boolean getIsValueObject() {
+        return isValueObject;
+    }
+
+    public void setIsValueObject(Boolean isValueObject) {
+        this.isValueObject = isValueObject;
+    }
 
     public String getName() {
         return name;
@@ -37,12 +47,12 @@ public class ApiField implements Serializable{
         this.description = description;
     }
 
-    public Boolean getIsValueObject() {
-        return isValueObject;
+    public Boolean getIsJson() {
+        return isJson;
     }
 
-    public void setIsValueObject(Boolean isValueObject) {
-        this.isValueObject = isValueObject;
+    public void setIsJson(Boolean isJson) {
+        this.isJson = isJson;
     }
 
     public Boolean getIsCollection() {
@@ -59,5 +69,13 @@ public class ApiField implements Serializable{
 
     public void setCollectionClass(String collectionClass) {
         CollectionClass = collectionClass;
+    }
+
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public void setRequired(Boolean required) {
+        this.required = required;
     }
 }

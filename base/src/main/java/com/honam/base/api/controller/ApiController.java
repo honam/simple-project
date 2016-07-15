@@ -1,8 +1,9 @@
-package com.honam.api.controller;
+package com.honam.base.api.controller;
 
-import com.honam.api.service.ApiScanEngine;
-import com.honam.api.vo.ApiMethod;
-import com.honam.api.vo.ApiValueObject;
+
+import com.honam.base.api.service.ApiScanEngine;
+import com.honam.base.api.vo.ApiMethod;
+import com.honam.base.api.vo.ApiValueObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

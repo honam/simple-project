@@ -1,4 +1,4 @@
-package com.honam.api.annotation;
+package com.honam.base.api.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

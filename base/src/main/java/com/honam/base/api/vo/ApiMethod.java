@@ -1,4 +1,4 @@
-package com.honam.api.vo;
+package com.honam.base.api.vo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

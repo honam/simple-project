@@ -1,9 +1,9 @@
 package com.honam.simple.service;
 
-import com.honam.api.annotation.APIMethod;
-import com.honam.api.annotation.APIParam;
-import com.honam.api.vo.ApiAuthor;
-import com.honam.api.vo.ApiCategory;
+import com.honam.base.api.annotation.APIMethod;
+import com.honam.base.api.annotation.APIParam;
+import com.honam.base.api.vo.ApiAuthor;
+import com.honam.base.api.vo.ApiCategory;
 import com.honam.simple.vo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

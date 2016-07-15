@@ -1,7 +1,7 @@
 package com.honam.simple.vo;
 
-import com.honam.api.annotation.APIField;
-import com.honam.api.annotation.APIValueObject;
+import com.honam.base.api.annotation.APIField;
+import com.honam.base.api.annotation.APIValueObject;
 
 import java.io.Serializable;
 

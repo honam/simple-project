@@ -1,4 +1,4 @@
-package com.honam.api.vo;
+package com.honam.base.api.vo;
 
 /**
  * Created by xuhaonan on 15/11/27.

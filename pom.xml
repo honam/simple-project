@@ -13,4 +13,16 @@
         <module>base</module>
         <module>simple</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                    <test>true</test>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
