@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${mysql.driverClassName}"></property>
+        <property name="url" value="${mysql.test.url}"></property>
+        <property name="username" value="${mysql.test.username}"></property>
+        <property name="password" value="${mysql.test.password}"></property>
+        <property name="initialSize" value="${mysql.test.initialSize}"></property><!-- 连接池启动时的初始值 -->
+        <property name="maxActive" value="${mysql.test.maxActive}"></property>
+        <property name="maxIdle" value="${mysql.test.maxIdle}"></property>
+        <property name="minIdle" value="${mysql.test.minIdle}"></property>
+        <property name="maxWait" value="5000"></property>
+        <property name="validationQuery" value="SELECT 1"></property>
+        <property name="testWhileIdle" value="true"></property>
+        <property name="testOnBorrow" value="true"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"></property>
+    </bean>
+
+    <!-- jdbcTemplate -->
+    <bean id="testJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    <bean id="testNamedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="testJdbcTemplate"/>
+    </bean>
+    <bean id="testTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource"/>
+        <property name="defaultTimeout" value="10"/>
+    </bean>
+
+    <tx:advice id="testTx" transaction-manager="testTransactionManager">
+        <tx:attributes>
+            <tx:method name="find*" propagation="SUPPORTS"/>
+            <tx:method name="get*" propagation="SUPPORTS"/>
+            <tx:method name="query*" propagation="SUPPORTS"/>
+            <tx:method name="load*" propagation="SUPPORTS"/>
+            <tx:method name="is*" propagation="SUPPORTS"/>
+            <tx:method name="has*" propagation="SUPPORTS"/>
+            <tx:method name="can*" propagation="SUPPORTS"/>
+            <tx:method name="*" read-only="false" propagation="REQUIRED" rollback-for="Exception" timeout="500000"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="testTx" pointcut="execution(* com.honam.simple..*Impl.*(..))"/>
+    </aop:config>
+
+</beans>
